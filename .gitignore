@@ -31,3 +31,6 @@ bin/
 ### My ###
 .idea
 *.iml
+.gradle
+**/build/
+!src/**/build/
