@@ -3,13 +3,13 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class LoginPage implements BasePage {
-    private static final SelenideElement usernameField = $("#field_email");
-    private static final SelenideElement passwordField = $("#field_password");
-    private static final SelenideElement loginButton = $("input[type=submit]");
-    private static final SelenideElement errorMessage = $(".input-e.login_error");
+    private static final SelenideElement usernameField = $x(".//*[@id='field_email']");
+    private static final SelenideElement passwordField = $x(".//*[@id='field_password']");
+    private static final SelenideElement loginButton = $x(".//input[@type='submit']");
+    private static final SelenideElement errorMessage = $x(".//*[contains(@class,'login_error')]");
 
     public LoginPage() {
         checkPage();
@@ -21,7 +21,7 @@ public class LoginPage implements BasePage {
     }
 
     public void checkUsername() {
-        usernameField.shouldBe(visible);
+        usernameField.shouldBe(visible.because("username should be visible on login page"));
     }
 
     public void setUsername(String username) {
@@ -29,7 +29,7 @@ public class LoginPage implements BasePage {
     }
 
     public void checkPassword() {
-        usernameField.shouldBe(visible);
+        passwordField.shouldBe(visible.because("password should be visible on login page"));
     }
 
     public void setPassword(String password) {
@@ -37,7 +37,7 @@ public class LoginPage implements BasePage {
     }
 
     public void checkLoginButton() {
-        loginButton.shouldBe(visible);
+        loginButton.shouldBe(visible.because("login button should be visible on login page"));
     }
 
     public MainPage loginButtonClick() {
@@ -45,15 +45,15 @@ public class LoginPage implements BasePage {
         return new MainPage();
     }
 
-    public SelenideElement getLoginButton() {
-        return loginButton;
+    public String getLoginButtonText() {
+        return loginButton.val();
     }
 
-    public void checkErrorMessage()  {
-        errorMessage.shouldBe(visible);
+    public void checkErrorMessage() {
+        errorMessage.shouldBe(visible.because("we entered incorrect data"));
     }
 
-    public SelenideElement getErrorMessage() {
-        return errorMessage;
+    public String getErrorMessage() {
+        return errorMessage.innerText();
     }
 }

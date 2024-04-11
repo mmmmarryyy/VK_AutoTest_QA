@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Browsers;
+
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 import com.codeborne.selenide.Selenide;
